@@ -21,8 +21,9 @@ jobs:
     docker: 
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "this is an environment variable on level of Organization $MyInfo"
-              echo "this is an environment variable on level of Organization $My_Name"
+      - run: 
+          echo "this is an environment variable on level of Organization $MyInfo"
+          echo "this is an environment variable on level of Project $My_Name"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
