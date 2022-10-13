@@ -33,3 +33,4 @@ workflows:
       - Print_World:
           requires:
             - Print_Hello
+      - Test_Env_Var
