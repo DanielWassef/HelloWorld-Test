@@ -12,11 +12,12 @@ jobs:
       - run: 
           command: |
             STR="Hello World!"
-            echo $STR    
+            echo $STR
+            ls
 
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
-          key: var-v1-{{checksum "version.txt"}}
+          key: var-v1
           paths:
             - myvar
 
@@ -26,8 +27,7 @@ jobs:
     steps:
       - restore_cache:
           keys: 
-            - var-v1-{{checksum "version.txt"}}
-            - var-v1-
+            - var-v1
       - run: 
           command: |
             echo $STR
