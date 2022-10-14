@@ -9,14 +9,17 @@ jobs:
           F2: cash_path.txt
     steps:
       - run: 
-          echo "I am a cash test" > ./$F1
-          echo "I am a cash test in path" > ./path/$F2
+          echo "F1 = $F1"
+      - run: 
+          echo "I am a cash test" > cash.txt
+      - run: 
+          echo "I am a cash test in path" > ./path/cash_path.txt
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
           key: mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
           paths:
-            - $F1
-            - ./path/$F2
+            - cash.txt
+            - ./path/cash_path.txt
 
   Test_Cash_restore:
     docker: 
