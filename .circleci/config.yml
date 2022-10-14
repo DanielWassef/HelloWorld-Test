@@ -9,9 +9,11 @@ jobs:
           F2: cash_path.txt
     steps:
       - run: 
-          - echo "I am a cash test" > $F1
-          - mkdir ./path
-          - echo "I am a cash test in path" > ./path/$F2
+          command: |
+            echo "I am a cash test" > $F1
+            pwd
+            mkdir -p ./path
+            echo "I am a cash test in path" > ./path/$F2
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
           key: mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
@@ -31,9 +33,10 @@ jobs:
             - mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
             - mytxt-v1-{{ .Branch }}
             - mytxt-v1
-      - run:
-          cat $F1
-          cat ./path/$F2
+      - run: 
+          command: |
+            cat $F1
+            cat ./path/$F2
 workflows:
   Cash_test:
     jobs:
