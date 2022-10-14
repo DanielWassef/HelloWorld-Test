@@ -7,13 +7,12 @@ environment:
 jobs:
   Test_Cash_create:
     docker: 
-      - image: circleci/node:13.8.0
+      - image: ubuntu
     steps:
       - run: 
           command: |
-            hostnamectl
-            yum install -y httpd
-            apt-get install -y appache2
+            apt update
+            apt install apache2
 
 
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
@@ -24,14 +23,15 @@ jobs:
 
   Test_Cash_restore:
     docker: 
-      - image: circleci/node:13.8.0
+      - image: ubuntu
     steps:
       - restore_cache:
           keys: 
             - var-v1
       - run: 
           command: |
-            yum install -y httpd
+            apt update
+            apt install apache2
 workflows:
   Cash_test:
     jobs:
