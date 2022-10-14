@@ -32,7 +32,7 @@ jobs:
 workflows:
   Cash_test:
     jobs:
-      - Test_Cash_create
-      - Test_Cash_restore:
+      - Test_WorkS_create
+      - Test_WorkS_restore:
           requires:
-            - Test_Cash_create
+            - Test_WorkS_create
