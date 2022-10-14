@@ -12,7 +12,6 @@ jobs:
       - run: 
           command: |
             apt update
-            clear
             echo "START INSTALL APPACHE"
             apt install apache2 -y
 
@@ -33,7 +32,6 @@ jobs:
       - run: 
           command: |
             apt update
-            clear
             echo "START INSTALL APPACHE"
             apt install apache2 -y
 workflows:
