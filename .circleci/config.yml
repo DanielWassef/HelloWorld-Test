@@ -26,7 +26,7 @@ jobs:
           F2: cash_path.txt
     steps:
       - restore_cache:
-          key: 
+          keys: 
             - mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
             - mytxt-v1-{{ .Branch }}
             - mytxt-v1
