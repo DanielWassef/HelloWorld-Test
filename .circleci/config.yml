@@ -15,7 +15,7 @@ jobs:
 
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ./
           paths:
             - WS.txt
 
@@ -24,7 +24,7 @@ jobs:
       - image: ubuntu
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: ./
 
       - run: 
           command: |
