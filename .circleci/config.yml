@@ -1,37 +1,42 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
-# Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-# See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-# Add steps to the job
-# See: https://circleci.com/docs/2.0/configuration-reference/#steps
 jobs:
-  Print_Hello:
+  Test_Cash_create:
     docker: 
       - image: circleci/node:13.8.0
-    steps:
-      - run: echo "Hello"
-  Print_World:
-    docker: 
-      - image: circleci/node:13.8.0
-    steps:
-      - run: echo " World"
-  Test_Env_Var:
-    docker: 
-      - image: circleci/node:13.8.0
+        environment:
+          F1: cash.txt
+          F2: cash_path.txt
     steps:
       - run: 
-          echo "this is an environment variable on level of Organization $MyInfo"
-          echo "\nthis is an environment variable on level of Project $My_Name"
+          echo "I am a cash test" > $F1
+          echo "I am a cash test in path" > ./path/$F2
+#To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
+      - save_cache:
+          key: mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
+          paths:
+            - $F1
+            - ./path/$F2
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+  Test_Cash_restore:
+    docker: 
+      - image: circleci/node:13.8.0
+        environment:
+          F1: cash.txt
+          F2: cash_path.txt
+    steps:
+      - restore_cache:
+          key: 
+            - mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
+            - mytxt-v1-{{ .Branch }}
+            - mytxt-v1
+      - run:
+          cat $F1
+          cat ./path/$F2
 workflows:
-  Hello-World:
+  Cash_test:
     jobs:
-      - Print_Hello
-      - Print_World:
+      - Test_Cash_create
+      - Test_Cash_restore:
           requires:
-            - Print_Hello
-      - Test_Env_Var
+            - Test_Cash_create
