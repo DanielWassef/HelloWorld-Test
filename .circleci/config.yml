@@ -5,34 +5,39 @@ environment:
   F2: cash_path.txt
 
 jobs:
-  Test_WorkS_create:
+  Test_Cash_create:
     docker: 
       - image: ubuntu
     steps:
+      - restore_cache:
+          keys: 
+            - var-v1
+
       - run: 
           command: |
-              echo "WS File" > WS.txt
-
+            apt update
+            apt install apache2 -y
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
-      - persist_to_workspace:
-          root: ./
+      - save_cache:
+          key: var-v1
           paths:
-            - WS.txt
+            - myvar
 
-  Test_WorkS_restore:
+  Test_Cash_restore:
     docker: 
       - image: ubuntu
     steps:
-      - attach_workspace:
-          at: ./
-
+      - restore_cache:
+          keys: 
+            - var-v1
       - run: 
           command: |
-            cat WS.txt
+            apt update
+            apt install apache2 -y
 workflows:
   Cash_test:
     jobs:
-      - Test_WorkS_create
-      - Test_WorkS_restore:
+      - Test_Cash_create
+      - Test_Cash_restore:
           requires:
-            - Test_WorkS_create
+            - Test_Cash_create
