@@ -11,6 +11,9 @@ jobs:
     steps:
       - run: 
           command: |
+            apt update
+            clear
+            echo "START INSTALL APPACHE"
             apt install apache2 -y
 
 
@@ -29,6 +32,9 @@ jobs:
             - var-v1
       - run: 
           command: |
+            apt update
+            clear
+            echo "START INSTALL APPACHE"
             apt install apache2 -y
 workflows:
   Cash_test:
