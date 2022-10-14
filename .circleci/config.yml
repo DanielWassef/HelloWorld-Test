@@ -11,9 +11,12 @@ jobs:
       - run: 
           command: |
             echo "I am a cash test" > $F1
-            pwd
             mkdir -p ./path
             echo "I am a cash test in path" > ./path/$F2
+            pwd
+            ll *
+            locate config.yml
+
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
           key: mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
