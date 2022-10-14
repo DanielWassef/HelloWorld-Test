@@ -1,12 +1,13 @@
 version: 2.1
 
+environment:
+  F1: cash.txt
+  F2: cash_path.txt
+
 jobs:
   Test_Cash_create:
     docker: 
       - image: circleci/node:13.8.0
-        environment:
-          F1: cash.txt
-          F2: cash_path.txt
     steps:
       - run: 
           command: |
@@ -18,15 +19,11 @@ jobs:
       - save_cache:
           key: mytxt-v1
           paths:
-            - $F1
-            - ./path/$F2
+            - here
 
   Test_Cash_restore:
     docker: 
       - image: circleci/node:13.8.0
-        environment:
-          F1: cash.txt
-          F2: cash_path.txt
     steps:
       - restore_cache:
           keys: 
