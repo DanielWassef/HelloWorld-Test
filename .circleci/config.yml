@@ -11,9 +11,7 @@ jobs:
     steps:
       - run: 
           command: |
-            STR="Hello World!"
-            echo $STR
-            ls
+            yum install -y httpd
 
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
@@ -30,7 +28,7 @@ jobs:
             - var-v1
       - run: 
           command: |
-            echo $STR
+            yum install -y httpd
 workflows:
   Cash_test:
     jobs:
