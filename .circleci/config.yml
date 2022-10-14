@@ -19,7 +19,7 @@ jobs:
 
 #To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
-          key: mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
+          key: mytxt-v1-{{ .Branch }}-{{ checksum "id.yml" }}
           paths:
             - $F1
             - ./path/$F2
@@ -33,7 +33,7 @@ jobs:
     steps:
       - restore_cache:
           keys: 
-            - mytxt-v1-{{ .Branch }}-{{ checksum "config.yml" }}
+            - mytxt-v1-{{ .Branch }}-{{ checksum "id.yml" }}
             - mytxt-v1-{{ .Branch }}
             - mytxt-v1
       - run: 
