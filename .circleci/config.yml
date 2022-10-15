@@ -12,12 +12,10 @@ jobs:
       - restore_cache:
           keys: 
             - var-v1
-
       - run: 
           command: |
             apt update
             apt install apache2 -y
-#To save a cache of a file or directory, add the save_cache step to a job in your .circleci/config.yml file:
       - save_cache:
           key: var-v2
           paths:
